@@ -87,6 +87,7 @@ class Collection extends Bounded {
                 this._type = other._type;
             } else {
                 this._eventList = new Immutable.List();
+                this._type = other._type;
             }
         } else if (_.isArray(arg1)) {
             const events = [];
@@ -247,7 +248,7 @@ class Collection extends Bounded {
         return i - 1;
     }
 
-    /**
+  /**
      * Generator to return all the events in the Collection.
      *
      * @example
