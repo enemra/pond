@@ -23,7 +23,7 @@ function buildMetaData(meta) {
 
     // Name
     d.name = meta.name ? meta.name : "";
-    
+
     // Index
     if (meta.index) {
         if (_.isString(meta.index)) {
@@ -77,7 +77,7 @@ The format of the data is as follows:
  - **name** - optional, but a good practice
  - **columns** - are necessary and give labels to the data in the points.
  - **points** - are an array of tuples. Each row is at a different time (or timerange), and each value corresponds to the column labels.
-   
+
 As just hinted at, the first column may actually be:
 
  - "time"
@@ -215,10 +215,6 @@ class TimeSeries {
                 this._collection = new Collection(events);
                 this._data = buildMetaData(meta2);
             }
-
-            if (!this._collection.isChronological()) {
-                throw new Error("Events supplied to TimeSeries constructor must be chronological");
-            }
         }
     }
 
@@ -349,9 +345,6 @@ class TimeSeries {
      * @return {TimeSeries}            A new TimeSeries
      */
     setCollection(collection) {
-        if (!collection.isChronological()) {
-            throw new Error("Collection supplied is not chronological");
-        }
         const result = new TimeSeries(this);
         if (collection) {
             result._collection = collection;
