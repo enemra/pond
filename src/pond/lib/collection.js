@@ -77,9 +77,12 @@ class Collection extends Bounded {
             this._eventList = new Immutable.List();
         } else if (arg1 instanceof Collection) {
             const other = arg1;
-            const copyEvents = arg2 || true;
             // copyEvents is whether to copy events from other, default is true
-            if (_.isUndefined(copyEvents) || copyEvents === true) {
+            let copyEvents = arg2;
+            if (_.isUndefined(copyEvents)) {
+              copyEvents = true;
+            }
+            if (copyEvents) {
                 this._eventList = other._eventList;
                 this._type = other._type;
             } else {
@@ -349,7 +352,8 @@ class Collection extends Bounded {
      */
     addEvent(event) {
         this._check(event);
-        const result = new Collection(this);
+        const copyEvents = false;
+        const result = new Collection(this, copyEvents);
         result._eventList = this._eventList.push(event._d);
         return result;
     }
